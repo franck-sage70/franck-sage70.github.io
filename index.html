@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franck SAGE — Expert IT & Intégrateur IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07080f;
+    --bg-card: #0d1020;
+    --bg-card2: #111628;
+    --border: rgba(99,132,255,0.15);
+    --border-hover: rgba(99,132,255,0.35);
+    --accent: #4f7cff;
+    --accent2: #00d4aa;
+    --accent3: #a78bfa;
+    --text: #e8eaf6;
+    --text-muted: #8892b0;
+    --text-dim: #4a5578;
+    --font: 'Space Grotesk', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 64px;
+    background: rgba(7,8,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* SECTIONS */
+  section { padding: 6rem 0; }
+  .container { max-width: 1060px; margin: 0 auto; padding: 0 2.5rem; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -300px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(79,124,255,0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -200px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0,212,170,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block; width: 32px; height: 1px;
+    background: var(--accent);
+  }
+  h1 {
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.3rem;
+  }
+  .hero-sub {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--accent2);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    font-family: var(--mono);
+  }
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent);
+    color: #fff;
+    padding: 0.75rem 1.75rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--border-hover);
+    color: var(--text);
+    padding: 0.75rem 1.75rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3.5rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat-val {
+    font-size: 2.2rem; font-weight: 700;
+    color: var(--text);
+    font-family: var(--mono);
+    line-height: 1;
+  }
+  .stat-val span { color: var(--accent); }
+  .stat-lbl { font-size: 12px; color: var(--text-muted); margin-top: 4px; letter-spacing: 0.04em; }
+
+  /* SECTION TITLES */
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+  .section-lead {
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 520px;
+    margin-bottom: 3rem;
+  }
+
+  /* RÉALISATIONS */
+  .realisations-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .real-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0 2rem;
+    transition: border-color 0.25s;
+  }
+  .real-card:hover { border-color: var(--border-hover); }
+  .real-number {
+    font-family: var(--mono);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    line-height: 1;
+    padding-top: 4px;
+    min-width: 56px;
+  }
+  .real-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .real-card h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+  .real-card p {
+    color: var(--text-muted);
+    font-size: 0.93rem;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+  .real-result {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,212,170,0.08);
+    border: 1px solid rgba(0,212,170,0.2);
+    border-radius: 6px;
+    padding: 0.4rem 0.9rem;
+    font-size: 13px;
+    color: var(--accent2);
+    font-weight: 500;
+  }
+  .real-result::before { content: '▶'; font-size: 9px; }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 8px; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), var(--border), transparent);
+  }
+  .tl-item { position: relative; margin-bottom: 2.5rem; }
+  .tl-dot {
+    position: absolute; left: -2.45rem; top: 6px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 3px rgba(79,124,255,0.2);
+  }
+  .tl-dot.dim { background: var(--text-dim); box-shadow: none; }
+  .tl-period {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .tl-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .tl-org {
+    font-size: 13px;
+    color: var(--accent2);
+    margin-bottom: 0.5rem;
+    font-family: var(--mono);
+  }
+  .tl-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+  .tl-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.75rem; }
+  .tag {
+    font-size: 11px;
+    font-family: var(--mono);
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* COMPÉTENCES */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+  }
+  .skill-block h4 {
+    font-size: 13px;
+    font-family: var(--mono);
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+  }
+  .skill-bar-row { margin-bottom: 0.75rem; }
+  .skill-bar-label {
+    display: flex; justify-content: space-between;
+    font-size: 13px; color: var(--text-muted);
+    margin-bottom: 5px;
+  }
+  .skill-bar-label span { color: var(--text-dim); font-family: var(--mono); font-size: 11px; }
+  .skill-bar-track {
+    height: 3px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .skill-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--accent);
+    transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .skill-bar-fill.teal { background: var(--accent2); }
+  .skill-bar-fill.purple { background: var(--accent3); }
+
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag-pill {
+    font-size: 12px;
+    font-family: var(--mono);
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .tag-pill:hover { border-color: var(--accent); color: var(--text); }
+  .tag-pill.hl { border-color: rgba(79,124,255,0.4); color: var(--accent); }
+
+  /* IA SECTION */
+  .ia-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .ia-section::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(167,139,250,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .ia-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .ia-item {
+    background: rgba(167,139,250,0.05);
+    border: 1px solid rgba(167,139,250,0.15);
+    border-radius: 8px;
+    padding: 1.25rem;
+  }
+  .ia-item-icon {
+    font-size: 20px;
+    margin-bottom: 0.75rem;
+    color: var(--accent3);
+  }
+  .ia-item h4 { font-size: 14px; font-weight: 600; margin-bottom: 0.4rem; }
+  .ia-item p { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+  .ia-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(167,139,250,0.1);
+    border: 1px solid rgba(167,139,250,0.25);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    color: var(--accent3);
+    font-family: var(--mono);
+    margin-bottom: 1.5rem;
+  }
+  .ia-badge::before { content: '●'; font-size: 8px; animation: pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .contact-info { display: flex; flex-direction: column; gap: 1.25rem; }
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+  }
+  .contact-icon {
+    font-size: 18px; color: var(--accent); flex-shrink: 0; margin-top: 2px;
+  }
+  .contact-label { font-size: 11px; color: var(--text-dim); font-family: var(--mono); margin-bottom: 2px; letter-spacing: 0.06em; }
+  .contact-val { font-size: 14px; color: var(--text); }
+  .contact-val a { color: var(--accent); text-decoration: none; }
+  .contact-val a:hover { text-decoration: underline; }
+
+  .contact-form-wrap {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+  .contact-form-wrap h3 { font-size: 1rem; font-weight: 600; margin-bottom: 1.25rem; }
+  .form-row { margin-bottom: 1rem; }
+  label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 5px; font-family: var(--mono); letter-spacing: 0.04em; }
+  input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 14px;
+    padding: 0.65rem 0.9rem;
+    transition: border-color 0.2s;
+    resize: vertical;
+  }
+  input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: rgba(79,124,255,0.04);
+  }
+  textarea { min-height: 110px; }
+  .btn-send {
+    width: 100%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.75rem;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: opacity 0.2s;
+  }
+  .btn-send:hover { opacity: 0.85; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 0;
+    text-align: center;
+  }
+  footer p { font-size: 13px; color: var(--text-dim); font-family: var(--mono); }
+  footer span { color: var(--accent); }
+
+  /* GRID BACKGROUND */
+  .hero-bg-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(79,124,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,124,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { display: none; }
+    .container { padding: 0 1.25rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .real-card { grid-template-columns: 1fr; }
+    .real-number { font-size: 2rem; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    .ia-section { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">FS.portfolio</div>
+  <div class="nav-links">
+    <a href="#realisations">Réalisations</a>
+    <a href="#parcours">Parcours</a>
+    <a href="#competences">Compétences</a>
+    <a href="#ia">IA & Agentique</a>
+    <a href="#contact">Contact</a>
+    <a href="CV_Franck_SAGE_2026.pdf" download style="color:#4f7cff; font-weight:600;">↓ CV</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg-grid"></div>
+  <div class="container">
+    <div class="hero-eyebrow">Disponible · CDI · BFC / Grand Est / Remote</div>
+    <h1>Franck SAGE</h1>
+    <div class="hero-sub">Expert IT &amp; Intégrateur de Systèmes Agentiques IA</div>
+    <p class="hero-desc">
+      30 ans d'expertise en architecture SI, cybersécurité et transformation digitale — principalement dans la santé numérique. Aujourd'hui tourné vers la conception et le déploiement d'agents IA automatisant des workflows métier complexes.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Me contacter</a>
+      <a href="CV_Franck_SAGE_2026.pdf" download class="btn-outline">↓ Télécharger le CV</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-val">30<span>+</span></div>
+        <div class="stat-lbl">années d'expérience IT</div>
+      </div>
+      <div>
+        <div class="stat-val">7<span>ans</span></div>
+        <div class="stat-lbl">zéro perte de données (MSP santé)</div>
+      </div>
+      <div>
+        <div class="stat-val">&lt;1<span>j</span></div>
+        <div class="stat-lbl">d'arrêt/an garanti (SLA)</div>
+      </div>
+      <div>
+        <div class="stat-val">72<span>h</span></div>
+        <div class="stat-lbl">migration infra industrielle complète</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RÉALISATIONS -->
+<section id="realisations">
+  <div class="container">
+    <div class="section-tag">// réalisations clés</div>
+    <h2>Projets à impact mesurable</h2>
+    <p class="section-lead">Trois interventions représentatives d'une approche qui livre des résultats chiffrés, défendables en entretien.</p>
+
+    <div class="realisations-grid">
+
+      <div class="real-card">
+        <div class="real-number">01</div>
+        <div>
+          <div class="real-tag">Infrastructure · Industrie · Migration</div>
+          <h3>Refondation d'infrastructure IT industrielle — en 72 heures</h3>
+          <p>
+            Entreprise à flux tendus opérant sur un mono-point de défaillance total : une panne paralysait l'ensemble des services. Analyse, conception et déploiement d'une architecture entièrement segmentée rendant chaque département informatiquement indépendant. Planification millimétrée pour une migration sans arrêt de production ni perte de données.
+          </p>
+          <p>
+            Contexte : contraintes de délai imposées par les équipes de production, infrastructure hétérogène à démanteler en live. L'intervention a requis une maîtrise simultanée du réseau, de la virtualisation, des OS serveurs et de la gestion du risque opérationnel.
+          </p>
+          <div class="real-result">Moins d'une journée d'arrêt IT par an sur toute la durée d'exploitation</div>
+        </div>
+      </div>
+
+      <div class="real-card">
+        <div class="real-number">02</div>
+        <div>
+          <div class="real-tag">Santé numérique · Sécurité · MSP</div>
+          <h3>Architecture sécurisée d'une maison de santé pluridisciplinaire — 7 ans sans incident</h3>
+          <p>
+            23 postes hétérogènes, aucune sécurité des données, chaque professionnel fonctionnant en silo complet. Déploiement d'une infrastructure client/serveur sécurisée intégrant les logiciels médicaux (AxiSanté, gestion cabinet), électrocardiographe en réseau, MAPA, conformité Sesam-Vitale et RGPD.
+          </p>
+          <p>
+            Spécificité santé numérique : la structure utilise en permanence les téléservices de l'Assurance Maladie (FSE, DMP, INSi, MSSanté, télétransmissions NOEMIE) — ce qui implique des flux entrants et sortants constants via internet avec les serveurs CNAM. Ces échanges de données de santé hautement sensibles ont rendu la cybersécurité non optionnelle : déploiement d'un pare-feu UTM avec filtrage applicatif, segmentation réseau stricte, chiffrement des flux, et politique de sauvegarde conforme HDS. Interopérabilité obligatoire entre équipements médicaux aux protocoles variés, dans le respect des exigences réglementaires RGPD et Ségur du numérique.
+          </p>
+          <div class="real-result">Zéro perte de données · moins d'un jour d'arrêt annuel sur 7 ans</div>
+        </div>
+      </div>
+
+      <div class="real-card">
+        <div class="real-number">03</div>
+        <div>
+          <div class="real-tag">Analytique · Transport · Redressement</div>
+          <h3>Redressement analytique d'une entreprise de transport routier</h3>
+          <p>
+            Entreprise au bord du dépôt de bilan, incapable d'évaluer la rentabilité réelle de chaque commande. Modélisation et déploiement d'un outil de rentabilité analytique en temps réel, accessible à des non-experts : chaque responsable pouvait visualiser instantanément la marge de chaque course.
+          </p>
+          <p>
+            L'intervention a démontré qu'une solution IT bien conçue peut dépasser le simple rôle technique et devenir un outil de décision stratégique. La valeur délivrée a conduit la direction à proposer un poste de directeur à l'issue de l'intervention.
+          </p>
+          <div class="real-result">Entreprise redressée · poste de direction proposé à l'issue</div>
+        </div>
+      </div>
+
+      <div class="real-card">
+        <div class="real-number">04</div>
+        <div>
+          <div class="real-tag">Vidéosurveillance · IoT · RGPD · Sécurité physique &amp; cyber</div>
+          <h3>Système de vidéosurveillance intelligente sans abonnement — site mixte professionnel / résidentiel</h3>
+          <p>
+            Déploiement d'un système de vidéosurveillance complet sur un site cadastral unique abritant à la fois un bâtiment professionnel (équipements, stock) et une résidence personnelle. Contrainte double : assurer la protection physique des deux zones avec des règles de déclenchement distinctes, tout en respectant le cadre légal RGPD applicable aux systèmes de vidéosurveillance exposés à internet.
+          </p>
+          <p>
+            Architecture basée exclusivement sur des produits <strong>Axis</strong> et leurs outils de gestion natifs (AXIS Camera Station, AXIS Object Analytics) : détection de présence par analyse vidéo embarquée, classification automatique du type de déclencheur (personne, véhicule, animal), et remontée d'alertes en temps réel vers les utilisateurs concernés via notifications multicanal. Aucun abonnement tiers : l'intelligence de détection est exécutée en local sur les caméras elles-mêmes.
+          </p>
+          <p>
+            Les flux vidéo transitant par internet ont imposé une couche de cybersécurité dédiée : segmentation réseau des caméras sur VLAN isolé, pare-feu avec filtrage applicatif strict des flux sortants, chiffrement end-to-end, et politique d'accès conforme RGPD (durées de rétention, droits d'accès, journalisation).
+          </p>
+          <p>
+            Le système intègre une tolérance de panne élevée conçue pour garantir la récupération quasi systématique des enregistrements vidéo et audio. Architecture de stockage redondante à deux niveaux : enregistrement simultané en local sur cartes SD embarquées dans chaque caméra, et sur NAS centralisé — les deux couches fonctionnant en parallèle sur un réseau hybride LAN filaire et WLAN. En cas de défaillance du réseau ou du NAS, les cartes SD prennent le relais sans interruption d'enregistrement ; à la restauration du lien, la synchronisation vers le NAS s'effectue automatiquement. Résultat : aucune fenêtre aveugle, continuité totale de la traçabilité.
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top: 0.25rem;">
+            <div class="real-result">Zéro abonnement · intelligence embarquée sur caméra</div>
+            <div class="real-result">Stockage redondant SD + NAS · tolérance de panne élevée</div>
+            <div class="real-result">Protection site mixte pro + résidentiel · conformité RGPD</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PARCOURS -->
+<section id="parcours">
+  <div class="container">
+    <div class="section-tag">// parcours professionnel</div>
+    <h2>Trente ans de terrain</h2>
+    <p class="section-lead">Une trajectoire qui va de l'ingénierie mécanique au pilotage MSP, avec une constante : la valeur délivrée aux clients.</p>
+
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-period">2003 — 2026</div>
+        <div class="tl-title">Gérant &amp; Directeur Technique — IA &amp; Automatisation</div>
+        <div class="tl-org">RESET 68 · Alsace / Franche-Comté</div>
+        <div class="tl-desc">
+          Pilotage complet d'une TPE MSP spécialisée santé numérique : architecture SI, cybersécurité, déploiement logiciels médicaux, supervision proactive RMM, PRA 3-2-1. Gestion autonome de l'ensemble de la chaîne — avant-vente, audit, déploiement, formation, MCO.
+        </div>
+        <div class="tl-tags">
+          <span class="tag">AxiSanté · Hellodoc</span>
+          <span class="tag">Ségur du numérique</span>
+          <span class="tag">Hyper-V · VMware</span>
+          <span class="tag">N-Sight RMM</span>
+          <span class="tag">PfSense · ESET</span>
+          <span class="tag">Microsoft 365</span>
+          <span class="tag">N8N · Claude AI</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot dim"></div>
+        <div class="tl-period">1996 — 2003</div>
+        <div class="tl-title">Co-Gérant &amp; Directeur Technique</div>
+        <div class="tl-org">SOS Informatique</div>
+        <div class="tl-desc">
+          Co-gestion de la société, direction de l'équipe technique. Structuration des processus d'intervention et de support. Mise en place de procédures d'excellence technique.
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot dim"></div>
+        <div class="tl-period">1992 — 1996</div>
+        <div class="tl-title">Technico-Commercial Grands Comptes</div>
+        <div class="tl-org">Happich GHE · Plastigray</div>
+        <div class="tl-desc">
+          Interface technique/commerciale avec PSA, Citroën, Volvo, Renault, Matra. Intérim Directeur commercial (6 mois). Négociations en français, anglais et espagnol. Coopération avec l'équipementier américain Donnelly (Magna International).
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot dim"></div>
+        <div class="tl-period">1990 — 1992</div>
+        <div class="tl-title">Assistant Ingénieur</div>
+        <div class="tl-org">ECIA</div>
+        <div class="tl-desc">
+          Calculs d'ingénieur, prix de revient technique, suivi évolutions produits. DUT Génie Mécanique et Productique — ENI Belfort (1989).
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COMPÉTENCES -->
+<section id="competences">
+  <div class="container">
+    <div class="section-tag">// compétences techniques</div>
+    <h2>Stack &amp; expertise</h2>
+    <p class="section-lead">Une maîtrise transversale, construite sur trente ans de terrain — des réseaux à l'IA agentique.</p>
+
+    <div class="skills-grid">
+
+      <div class="skill-block">
+        <h4>Infrastructure &amp; Réseaux</h4>
+        <div class="skill-bar-row">
+          <div class="skill-bar-label">Architecture SI / LAN / WAN <span>Expert</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:95%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-label">Virtualisation Hyper-V / VMware <span>Expert</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:92%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-label">VLAN / WLAN / VPN / Routage <span>Expert</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-label">Cloud hybride Azure / Office 365 <span>Avancé</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:82%"></div></div>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <h4>Cybersécurité &amp; PRA</h4>
+        <div class="skill-bar-row">
+          <div class="skill-bar-label">PfSense / UTM ZYXEL <span>Expert</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill teal" style="width:92%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-label">ESET Protect / Entra ID <span>Expert</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill teal" style="width:90%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-label">PRA 3-2-1 / SLA &lt;1j <span>Expert</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill teal" style="width:95%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-label">Audit conformité RGPD <span>Avancé</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill teal" style="width:80%"></div></div>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <h4>Santé numérique</h4>
+        <div class="skill-bar-row">
+          <div class="skill-bar-label">AxiSanté / Hellodoc <span>Expert</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill purple" style="width:95%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-label">Ségur / DMP / FSE / INSi <span>Expert</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill purple" style="width:93%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-label">Sesam-Vitale / MSSanté <span>Expert</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill purple" style="width:90%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-label">HDS / Télémédecine <span>Avancé</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill purple" style="width:78%"></div></div>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <h4>Stack technique complémentaire</h4>
+        <div class="tag-cloud">
+          <span class="tag-pill hl">N-Sight RMM</span>
+          <span class="tag-pill hl">CoveData</span>
+          <span class="tag-pill hl">Nebula</span>
+          <span class="tag-pill">Active Directory</span>
+          <span class="tag-pill">GPO / DNS / DHCP</span>
+          <span class="tag-pill">ShadowProtect</span>
+          <span class="tag-pill">WASABI</span>
+          <span class="tag-pill">Hornet Security</span>
+          <span class="tag-pill hl">Power Automate</span>
+          <span class="tag-pill hl">N8N</span>
+          <span class="tag-pill">CODIAL ERP</span>
+          <span class="tag-pill">EBP Compta/Paie</span>
+          <span class="tag-pill">Dragon Dictation</span>
+          <span class="tag-pill">ZCNE certifié</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- IA & AGENTIQUE -->
+<section id="ia">
+  <div class="container">
+    <div class="section-tag">// montée en compétences</div>
+    <h2>IA Agentique &amp; Automatisation</h2>
+    <p class="section-lead">Un virage stratégique ancré dans la pratique quotidienne — pas une reconversion théorique.</p>
+
+    <div class="ia-section">
+      <div class="ia-badge">En cours · 2025–2026</div>
+      <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 620px; line-height: 1.8;">
+        Utilisateur quotidien de Claude, Perplexity et Copilot depuis 2025, j'ai intégré l'IA agentique dans mes propres workflows opérationnels — production documentaire, analyse, automatisation de campagnes. La montée en compétences formelle porte sur les fondamentaux architecturaux des systèmes agentiques.
+      </p>
+
+      <div class="ia-items">
+        <div class="ia-item">
+          <div class="ia-item-icon">⬡</div>
+          <h4>LLM &amp; Prompt Engineering</h4>
+          <p>Maîtrise des modèles génératifs, structuration de prompts complexes, chaînes de raisonnement multi-étapes.</p>
+        </div>
+        <div class="ia-item">
+          <div class="ia-item-icon">⬡</div>
+          <h4>RAG &amp; Bases vectorielles</h4>
+          <p>Retrieval-Augmented Generation, contrôle d'accès, conformité RGPD — application aux données médicales.</p>
+        </div>
+        <div class="ia-item">
+          <div class="ia-item-icon">⬡</div>
+          <h4>Orchestration d'agents</h4>
+          <p>LangChain, LangGraph, protocole MCP — workflows multi-agents connectés via APIs REST / JSON / Webhooks.</p>
+        </div>
+        <div class="ia-item">
+          <div class="ia-item-icon">⬡</div>
+          <h4>Automatisation N8N</h4>
+          <p>Pipelines opérationnels déployés en production — Power Automate, N8N, intégrations Microsoft 365.</p>
+        </div>
+        <div class="ia-item">
+          <div class="ia-item-icon">⬡</div>
+          <h4>Python &amp; APIs</h4>
+          <p>Bases et scripting pour l'automatisation, intégration d'APIs REST, traitement de données JSON.</p>
+        </div>
+        <div class="ia-item">
+          <div class="ia-item-icon">⬡</div>
+          <h4>Certification visée</h4>
+          <p>Microsoft Azure AI Engineer Associate — préparation en cours, objectif 2026.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-tag">// contact</div>
+    <h2>Travaillons ensemble</h2>
+    <p class="section-lead">Disponible pour un CDI en BFC, Grand Est ou en remote partiel. Réponse sous 24h.</p>
+
+    <div class="contact-grid">
+
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">✉</div>
+          <div>
+            <div class="contact-label">EMAIL</div>
+            <div class="contact-val"><a href="mailto:franck.sage@reset68.fr">franck.sage@reset68.fr</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✆</div>
+          <div>
+            <div class="contact-label">TÉLÉPHONE</div>
+            <div class="contact-val">06 99 34 11 22</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">⊙</div>
+          <div>
+            <div class="contact-label">LOCALISATION</div>
+            <div class="contact-val">Coulevon (70) — Haute-Saône<br><span style="color: var(--text-muted); font-size: 13px;">Mobilité totale BFC · Grand Est · Suisse · Remote</span></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">⊞</div>
+          <div>
+            <div class="contact-label">PERMIS</div>
+            <div class="contact-val">A · B · BE — Véhicule personnel</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <h3>Envoyer un message</h3>
+        <div class="form-row">
+          <label for="cf-nom">NOM &amp; PRÉNOM</label>
+          <input type="text" id="cf-nom" placeholder="Jean Dupont">
+        </div>
+        <div class="form-row">
+          <label for="cf-email">EMAIL</label>
+          <input type="email" id="cf-email" placeholder="recruteur@entreprise.fr">
+        </div>
+        <div class="form-row">
+          <label for="cf-sujet">SUJET</label>
+          <input type="text" id="cf-sujet" placeholder="Opportunité CDI — Intégrateur IA">
+        </div>
+        <div class="form-row">
+          <label for="cf-msg">MESSAGE</label>
+          <textarea id="cf-msg" placeholder="Décrivez le poste ou votre besoin..."></textarea>
+        </div>
+        <button class="btn-send" onclick="handleContactForm()">Envoyer le message</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>© 2026 <span>Franck SAGE</span> · Expert IT &amp; Intégrateur de Systèmes Agentiques IA · Coulevon (70)</p>
+  </div>
+</footer>
+
+<script>
+function handleContactForm() {
+  const nom = document.getElementById('cf-nom').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const sujet = document.getElementById('cf-sujet').value.trim();
+  const msg = document.getElementById('cf-msg').value.trim();
+  if (!nom || !email || !msg) {
+    alert('Merci de remplir les champs obligatoires.');
+    return;
+  }
+  const mailto = `mailto:franck.sage@reset68.fr?subject=${encodeURIComponent(sujet || 'Contact Portfolio')}&body=${encodeURIComponent('De : ' + nom + '\nEmail : ' + email + '\n\n' + msg)}`;
+  window.location.href = mailto;
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+
+</body>
+</html>
